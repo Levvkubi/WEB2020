@@ -1,0 +1,250 @@
+﻿<Window x:Class="TaskAssistant.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBTaskAssistant.ViewModels;assembly=DBTaskAssistant"
+        mc:Ignorable="d"
+        Title="Registration" MinHeight="720" MinWidth="1280" Height="720" Width="1280">
+    <Window.DataContext>
+        <local:UserModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <ControlTemplate x:Key="validationFailed">
+            <StackPanel Orientation="Horizontal">
+                <AdornedElementPlaceholder />
+                <TextBlock Foreground="Red" FontSize="35" FontWeight="Bold">!</TextBlock>
+            </StackPanel>
+        </ControlTemplate>
+        <Style TargetType="Border" x:Key="Defolt">
+            <Setter Property="CornerRadius" Value="50"/>
+            <Setter Property="Opacity" Value="0.65"/>
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#676cfb" Offset="0" />
+                        <GradientStop Color="#6bcdfd" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="RoundedGrad">
+
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="BackBord" CornerRadius="30" BorderThickness="2" BorderBrush="White" >
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#699cfc" Offset="0" />
+                                        <GradientStop Color="#6bcdfd" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="BackBord" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#8fb6ff" Offset="0" />
+                                            <GradientStop Color="#91dbff" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="BackBord" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#bdd4ff" Offset="0" />
+                                            <GradientStop Color="#bfeaff" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox" x:Key="InputFiled">
+            <Setter Property="Foreground" Value="#8ab4fa"/>
+            <Setter Property="MaxLength" Value="30"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Margin" Value="5 0"/>
+            <Setter Property="Padding" Value="20 4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="25">
+
+                            <Grid>
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Margin="0"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock
+                                    x:Name="DefText"
+                                    Text="{TemplateBinding Tag}"
+                                    Padding="{TemplateBinding Padding}"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    Foreground="#a6a6a6"
+                                    IsHitTestVisible="False"
+                                    TextAlignment="{TemplateBinding TextAlignment}"
+                                    Visibility="Collapsed"
+                                    />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="DefText" Property="Visibility" Value="Visible"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="PasswordBox" x:Key="InputFiledPass">
+            <Setter Property="Foreground" Value="#8ab4fa"/>
+            <Setter Property="MaxLength" Value="30"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Margin" Value="5 0"/>
+            <Setter Property="Padding" Value="20 4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="25">
+
+                            <Grid>
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Margin="0"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock
+                                    x:Name="DefPassText"
+                                    Text="{TemplateBinding Tag}"
+                                    Padding="{TemplateBinding Padding}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Background="Transparent"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    Foreground="#a6a6a6"
+                                    IsHitTestVisible="False"
+                                    TextAlignment="Center"
+                                    Visibility="Visible"
+                                    />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ErrorBlock">
+            <Setter Property="Foreground" Value="#f76565"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="40 0"/>
+        </Style>
+    </Window.Resources>
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\BackgroundLogin.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource Defolt}"/>
+        <Border  Grid.Column="1" Grid.Row="1" Padding="50 0">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Реєстрація" 
+                           Foreground="White" 
+                           FontWeight="Medium" 
+                           FontSize="60" 
+                           HorizontalAlignment="Center" 
+                           Margin="0"/>
+                <TextBlock FontWeight="Medium" 
+                           Foreground="White" 
+                           FontSize= "23" 
+                           HorizontalAlignment="Center"  
+                           Margin="0">
+                    Створіть ваш аккаунт. Це безплатно та швидко.
+                </TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock x:Name="firstNameErrorBloc" Style="{StaticResource ErrorBlock}"/>
+                        <TextBox x:Name="firstNameBox" Tag="Ім'я" Style="{StaticResource InputFiled}" Validation.ErrorTemplate="{StaticResource validationFailed}"
+                                 Text="{Binding Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding ErrorCollection[Name]}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock x:Name="secondNameErrorBloc" Style="{StaticResource ErrorBlock}"/>
+                        <TextBox x:Name="secondNameBox" Tag="Прізвище" Style="{StaticResource InputFiled}" Validation.ErrorTemplate="{StaticResource validationFailed}"
+                                 Text="{Binding Surname, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding ErrorCollection[Surname]}"/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock x:Name="usernameErrorBloc" Style="{StaticResource ErrorBlock}"/>
+                <TextBox x:Name="UsernameBox" Tag="Пошта" Style="{StaticResource InputFiled}" Validation.ErrorTemplate="{StaticResource validationFailed}"
+                                 Text="{Binding Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                 ToolTip="{Binding ErrorCollection[Username]}"/>
+                <TextBlock x:Name="passwordErrorBloc" Style="{StaticResource ErrorBlock}"/>
+                <PasswordBox x:Name="PassBox" Tag="Пароль" Style="{StaticResource InputFiledPass}" PasswordChanged="PassBox_PasswordChanged"/>
+                <TextBlock x:Name="confPasswordErrorBloc" Style="{StaticResource ErrorBlock}"/>
+                <PasswordBox x:Name="ConfPassBox" Tag="Повторіть пароль" Style="{StaticResource InputFiledPass}" PasswordChanged="ConfPassBox_PasswordChanged"/>
+                <Button Content="Зареєструватись" Width="350" Margin="15" Style="{StaticResource RoundedGrad}" Click="Button_Click"/>
+                <Button x:Name="regist"
+                        Content="Уже маєте акаунт?" 
+                        Width="300"
+                        FontSize="30" FontWeight="Medium" 
+                        Foreground="White" 
+                        Background="Transparent" 
+                        BorderThickness="0" 
+                        Click="login_Click"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

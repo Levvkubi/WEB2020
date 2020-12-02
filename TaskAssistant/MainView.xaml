@@ -1,0 +1,264 @@
+﻿<Window x:Class="TaskAssistant.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskAssistant"
+        xmlns:vm="clr-namespace:DBTaskAssistant.ViewModels;assembly=DBTaskAssistant"
+        xmlns:convert="clr-namespace:TaskAssistant"
+        mc:Ignorable="d"
+        Title="Task Assistant" MinHeight="720" MinWidth="1280" Height="1080" Width="1920"
+        WindowState="Maximized">
+    <Window.Resources>
+        <convert:PriorityColor x:Key="priotityConverter"/>
+        <Style TargetType="Button" x:Key="TextButt">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style TargetType="Button" x:Key="EditButt" BasedOn="{StaticResource TextButt}">
+            <Style.Setters>
+                <Setter Property="Width" Value="80"/>
+                <Setter Property="Height" Value="80"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <!--<Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <ControlTemplate.Triggers>
+                                -->
+                <!--<DataTrigger Binding="{Binding ElementName=Listbox, Path=SelectedIndex}"
+                                            Value="-1">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                </Trigger>-->
+                <!--
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>-->
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ItemView">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="Margin" Value="0 5"/>
+        </Style>
+        <Style TargetType="Button" x:Key="RoundedGrad">
+
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="5"/>
+            <Setter Property="Margin" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="BackBord" CornerRadius="100" BorderThickness="2" BorderBrush="White" >
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#699cfc" Offset="0" />
+                                        <GradientStop Color="#6bcdfd" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Width="5" Height="50" Background="White"/>
+                            <Border Width="50" Height="5" Background="White"/>
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="BackBord" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#8fb6ff" Offset="0" />
+                                            <GradientStop Color="#91dbff" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsPressed" Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="BackBord" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#bdd4ff" Offset="0" />
+                                            <GradientStop Color="#bfeaff" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainVM />
+    </Window.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\BackgroundLogin.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0"  Background="#676cfb" Opacity="0.65"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Width="47" Height="47"
+                    Margin="10 5"
+                    Padding="3"
+                    BorderThickness="0"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
+                <Button.Background>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="Images\home_image.png"/>
+                </Button.Background>
+            </Button>
+            <TextBlock Text="Меню" 
+                   Foreground="White" 
+                   FontSize="60"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   />
+        </StackPanel>
+        <Border Grid.Row="0" Grid.Column="1" Opacity="0.65" >
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#676cfb" Offset="0" />
+                    <GradientStop Color="#6bcdfd" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <UniformGrid Columns="2" Grid.Row="0" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" >
+
+                <!--<ToolBar>
+                    <Button Content="Button1"></Button>
+                    <Button Content="Button2"></Button>
+                    <Menu>
+                        <MenuItem Header="Menu">
+                            <MenuItem Header="MenuItem1"/>
+                        </MenuItem>
+                    </Menu>
+                </ToolBar>-->
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Button  x:Name="EditButt" 
+                    Click="Button_Click" 
+                    Style="{StaticResource EditButt}">
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="Images\edit.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="DeleteButt"
+                    Click="DeleteButt_Click" 
+                    Style="{StaticResource EditButt}">
+                    <Button.Background>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="Images\delete.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Exit"
+                    Content="Вихід" 
+                    Width="130"
+                    Margin="20 0"
+                    FontSize="45"
+                    Height="80"
+                    Style="{StaticResource TextButt}" Click="Exit_Click"/>
+            </StackPanel>
+        </UniformGrid>
+        <Border Grid.Row="1" Grid.Column="0"  Opacity="0.65">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#676cfb" Offset="0" />
+                    <GradientStop Color="#6bcdfd" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+            <Button x:Name="SortByPriority"
+                    Content="Сортувати за пріорітетом" 
+                    Width="350"
+                    Margin="10 0"
+                    Style="{StaticResource TextButt}" Click="SortByPriority_Click"/>
+            <Button x:Name="SortByTime"
+                    Content="Сортувати за часом" 
+                    Width="300"
+                    Style="{StaticResource TextButt}" Click="SortByTime_Click"/>
+            <Button x:Name="UserEdit"
+                    Content="Налаштування" 
+                    Style="{StaticResource TextButt}" Click="UserEdit_Click"/>
+        </StackPanel>
+
+        <StackPanel x:Name="Menu" Grid.Column="0">
+        </StackPanel>
+        <ListBox Grid.Row="1"
+                 Grid.Column="2"
+                 x:Name="Listbox"
+                 HorizontalAlignment="Stretch" 
+                 ItemsSource="{Binding tasks}"
+                 SelectedItem="{Binding CurrTask}"
+                 Background="Transparent"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border Background="{Binding Priority, Converter= {StaticResource priotityConverter}}" Opacity="0.85" Padding="5 10">
+                        </Border>
+                        <Grid x:Name="Container" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="440"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock  Grid.Column="0" 
+                                    Text="{Binding Note}" 
+                                    Style="{StaticResource ItemView}"
+                                    HorizontalAlignment="Left"
+                                    Width="{Binding ElementName=Container,Path=ActualWidth}"/>
+                            <TextBlock Grid.Column="1" 
+                                   Text="{Binding Date}"
+                                   Style="{StaticResource ItemView}"
+                                   HorizontalAlignment="Left"/>
+                        </Grid>
+                    </Grid>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="AddButt" 
+                Grid.Column="1" Grid.Row="1"
+                Content="+"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Width="80" 
+                Height="80"
+                Padding="30"
+                Style="{StaticResource RoundedGrad}" Click="AddButt_Click">
+        </Button>
+    </Grid>
+</Window>
